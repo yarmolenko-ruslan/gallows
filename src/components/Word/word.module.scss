@@ -1,0 +1,40 @@
+.word {
+	text-align: center;
+}
+
+.title {
+	font-size: 40px;
+	font-weight: 400;
+	margin-bottom: 20px;
+
+	@media (max-width: 630px) {
+		font-size: 30px;
+	}
+
+	@media (max-width: 410px) {
+		font-size: 24px;
+	}
+}
+
+.wrapper {
+	margin: 0 auto;
+	width: 100%;
+}
+
+.guesses_word,
+.number {
+	text-transform: uppercase;
+	color: red;
+	letter-spacing: 2px;
+}
+
+.not_true,
+.attempts {
+	margin: 5px 0;
+	font-size: 18px;
+	font-weight: 400;
+
+	@media (max-width: 410px) {
+		font-size: 18px;
+	}
+}
