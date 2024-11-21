@@ -97,7 +97,6 @@ function Game() {
 		]
 	);
 
-	// Функция очищения всех состояний для обнуления игры
 	const resetStateGame = () => {
 		setCategory('');
 		setWord('');

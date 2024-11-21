@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { Context } from '../../context/constants';
 import { IAlphaProp } from '../../interface/interface';
 import styles from './alphabet.module.scss';
+import { alphaWord } from './constants';
 
 function Alphabet({ handleGuess }: IAlphaProp) {
 	const {
@@ -15,47 +16,14 @@ function Alphabet({ handleGuess }: IAlphaProp) {
 	} = useContext(Context);
 	const remained = maxWrongGuesses - wrongGuesses;
 
-	const alphaWord = [
-		'а',
-		'б',
-		'в',
-		'г',
-		'д',
-		'е',
-		'ё',
-		'ж',
-		'з',
-		'и',
-		'й',
-		'к',
-		'л',
-		'м',
-		'н',
-		'о',
-		'п',
-		'р',
-		'с',
-		'т',
-		'у',
-		'ф',
-		'х',
-		'ц',
-		'ч',
-		'ш',
-		'щ',
-		'ъ',
-		'ы',
-		'ь',
-		'э',
-		'ю',
-		'я',
-	];
+	const isDisButton = `${styles.button_inactive} ${styles.button}`;
+	const isActButton = `${styles.button_active} ${styles.button}`;
 
 	const isActiveButton = (word: string) => {
 		return incorrectLetters.includes(word) || !category
-			? styles.button_inactive + ' ' + styles.button
+			? isDisButton
 			: guesses.includes(word)
-			? styles.button_active + ' ' + styles.button
+			? isActButton
 			: styles.button;
 	};
 

@@ -18,7 +18,7 @@
 
 ## Используемые технологии
 
-- CSS
+- SCSS
 - HTML
 - JavaScript
 - Vite
