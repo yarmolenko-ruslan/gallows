@@ -5,7 +5,9 @@ import Header from '../Header/Header.tsx';
 
 import styles from './game.module.scss';
 import { useNavigate } from 'react-router-dom';
-import Main from '../Main/Main.tsx';
+import Picture from '../Picture/Picture.tsx';
+import Word from '../Word/Word.tsx';
+import Alphabet from '../Alphabet/Alphabet.tsx';
 
 function Game() {
 	const {
@@ -24,11 +26,11 @@ function Game() {
 		setIncorrectLetters,
 	} = useContext(Context);
 
-	const inputRef = useRef<HTMLDivElement | null>(null);
+	const focusKeyboardRef = useRef<HTMLDivElement | null>(null);
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		inputRef.current?.focus();
+		focusKeyboardRef.current?.focus();
 
 		if (!category || !data.length) {
 			navigate('/');
@@ -109,16 +111,16 @@ function Game() {
 		<div
 			className={styles.game}
 			tabIndex={0}
-			ref={inputRef}
+			ref={focusKeyboardRef}
 			onKeyDown={handleKeydown}
 		>
 			<div className={styles.wrapper}>
 				<Header />
-				<Main
-					handleGuess={handleGuess}
-					renderGuesses={renderGuesses}
-					renderWord={renderWord}
-				/>
+				<main>
+					<Picture />
+					<Word renderWord={renderWord} renderGuesses={renderGuesses} />
+					<Alphabet handleGuess={handleGuess} />
+				</main>
 				<Footer resetStateGame={resetStateGame} />
 			</div>
 		</div>
