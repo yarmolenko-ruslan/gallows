@@ -31,10 +31,6 @@ function Alphabet({ handleGuess }: IAlphaProp) {
 		return (
 			<button
 				className={isActiveButton(word)}
-				onClick={e => {
-					const target = e.target as HTMLElement;
-					handleGuess(target.textContent || '');
-				}}
 				key={index}
 				disabled={remained === 0 || gameOver || isWinner}
 			>
@@ -44,7 +40,15 @@ function Alphabet({ handleGuess }: IAlphaProp) {
 	};
 
 	return (
-		<section className={styles.alphabet}>{alphaWord.map(renderButton)}</section>
+		<section
+			className={styles.alphabet}
+			onClick={e => {
+				const target = e.target as HTMLElement;
+				handleGuess(target.textContent || '');
+			}}
+		>
+			{alphaWord.map(renderButton)}
+		</section>
 	);
 }
 
