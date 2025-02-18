@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { Context } from '../../context/constants';
 import styles from './start.module.scss';
 
+const URL = 'https://66c1719af83fffcb587951a3.mockapi.io/gallows';
+
 const Start = () => {
 	const {
 		category,
@@ -15,19 +17,12 @@ const Start = () => {
 		categoryList,
 	} = useContext(Context);
 
-	const isActive = `${styles.item} ${styles.item_active}`;
-	const isDisButton = `${styles.link} ${styles.link_disabled}`;
-
 	useEffect(() => {
 		setIsLoading(true);
-		fetch(`https://66c1719af83fffcb587951a3.mockapi.io/gallows`)
+		fetch(URL)
 			.then(res => res.json())
-			.then(json => {
-				setData(json);
-			})
-			.catch(err => {
-				console.error(err);
-			})
+			.then(json => setData(json))
+			.catch(console.error)
 			.finally(() => setIsLoading(false));
 	}, []);
 
@@ -35,6 +30,11 @@ const Start = () => {
 		const categoryListApi = data.map(item => item.category);
 		setCategoryList(categoryListApi);
 	}, [data, setCategoryList]);
+
+	const btnStatus = {
+		isActive: `${styles.item} ${styles.item_active}`,
+		isDisButton: `${styles.link} ${styles.link_disabled}`,
+	};
 
 	return (
 		<section className={styles.start}>
@@ -62,7 +62,7 @@ const Start = () => {
 							<li key={index}>
 								<button
 									type='button'
-									className={_category == category ? isActive : styles.item}
+									className={_category == category ? btnStatus.isActive : styles.item}
 									onClick={e => {
 										const target = e.target as HTMLElement;
 										setCategory(target.textContent?.toLowerCase() || '');
@@ -77,7 +77,7 @@ const Start = () => {
 
 				<Link
 					to={category && 'game'}
-					className={category ? styles.link : isDisButton}
+					className={category ? styles.link : btnStatus.isDisButton}
 				>
 					Начать игру
 				</Link>

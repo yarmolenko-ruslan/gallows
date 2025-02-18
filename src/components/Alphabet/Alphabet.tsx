@@ -16,14 +16,16 @@ function Alphabet({ handleGuess }: IAlphaProp) {
 	} = useContext(Context);
 	const remained = maxWrongGuesses - wrongGuesses;
 
-	const isDisButton = `${styles.button_inactive} ${styles.button}`;
-	const isActButton = `${styles.button_active} ${styles.button}`;
+	const btnStatus = {
+		isDisButton: `${styles.button_inactive} ${styles.button}`,
+		isActButton: `${styles.button_active} ${styles.button}`,
+	};
 
 	const isActiveButton = (word: string) => {
 		return incorrectLetters.includes(word) || !category
-			? isDisButton
+			? btnStatus.isDisButton
 			: guesses.includes(word)
-			? isActButton
+			? btnStatus.isActButton
 			: styles.button;
 	};
 
